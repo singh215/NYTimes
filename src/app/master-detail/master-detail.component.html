@@ -1,0 +1,37 @@
+<div class="master_detail">
+    <div class="blade1">
+           <div class="master_header">
+           <mat-button-toggle-group (change)="onCategoryToggle($event)" value="world">
+            <mat-button-toggle value="world">World</mat-button-toggle>
+            <mat-button-toggle value="science">Science</mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+          <div class="top_story_list">
+           <ul>
+               <ng-container *ngFor="let story of topStories">
+               <li *ngIf="story.title"
+               (click)="onStorySelect(story)"
+               [ngClass]="{ 'selected': story.title === selectedStory.title }"><span>{{story.title}}</span></li>
+            </ng-container>
+           </ul>
+        </div>
+    </div>
+    <div class="blade2">
+        <mat-card class="storycard" *ngIf="selectedStory">
+            <mat-card-header>
+              <mat-card-title>{{selectedStory.title}}</mat-card-title>
+              <mat-card-subtitle>{{selectedStory.byline}}</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image [src]="selectedStory.multimedia[0].url" [alt]="selectedStory.multimedia[0].caption">
+            <mat-card-content>
+              <p>
+                {{selectedStory.abstract}}
+              </p>
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-button (click)="readMore(selectedStory)">Read more...</button>
+            </mat-card-actions>
+          </mat-card>
+          
+    </div>
+</div>

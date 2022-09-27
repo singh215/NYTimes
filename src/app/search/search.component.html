@@ -1,0 +1,49 @@
+<div class="flex_class">
+<div class="search_bar">
+  <mat-label>
+    <h5 class="headingStyle">Enter Dates for News Search</h5>
+  </mat-label>
+<mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Begin date</mat-label>
+    <input matInput [matDatepicker]="beginPicker"
+    [max]="today"
+    (dateChange)="onBeginDateChange('change', $event)" disabled>
+    <mat-datepicker-toggle matSuffix [for]="beginPicker"></mat-datepicker-toggle>
+    <mat-datepicker #beginPicker disabled="false"></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>End date</mat-label>
+    <input matInput #endPickerInput [matDatepicker]="endPicker"
+    [max]="today" [min]="minDate" (dateChange)="onEndDateChange('change', $event)" disabled>
+    <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+    <mat-datepicker #endPicker disabled="false"></mat-datepicker>
+  </mat-form-field>
+  <button mat-mini-fab class="searchIcon" color="primary" (click)="search()">
+    <mat-icon>search</mat-icon>
+  </button>
+</div>
+<div class="tableData">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef> Title </th>
+          <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="publish_date">
+          <th mat-header-cell *matHeaderCellDef> Publish date </th>
+          <td mat-cell *matCellDef="let element"> {{element.publish_date}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="section_name">
+          <th mat-header-cell *matHeaderCellDef> Section </th>
+          <td mat-cell *matCellDef="let element"> {{element.section_name}} </td>
+        </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>         
+      <mat-paginator #paginator [pageSizeOptions]="[5, 10, 15]"
+        showFirstLastButtons></mat-paginator>       
+</div>
+</div>

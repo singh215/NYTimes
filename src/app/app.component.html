@@ -1,0 +1,11 @@
+  <mat-toolbar color="primary">
+    <span class ="headerAlign">The New York Times</span>   
+  </mat-toolbar>
+<nav mat-tab-nav-bar backgroundColor="primary" mat-align-tabs="end">
+    <a mat-tab-link *ngFor="let link of links"
+     (click)="activeLink = link;routeMethod(link)"
+     [active]="activeLink == link">{{link}}
+     <mat-icon class="example-icon">{{link}}</mat-icon>
+    </a>
+   </nav>
+<router-outlet></router-outlet>
